@@ -1,0 +1,2 @@
+from MedicoModels import MedicoModels
+from PacienteModels import PacienteModels
