@@ -1,0 +1,46 @@
+version: 3.7
+services:
+  fastapi:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRE_HOST=postgres
+      - POSTGRE_USER=postgres
+      - POSTGRE_PASSWORD=admin
+      - POSTGRE_DB=prontuario
+    restart: always
+
+    depends_on:
+      - postgres
+
+    networks:
+      - postgres-network
+    
+
+  postgres:
+    build:
+      context: .
+      dockerfile: DockerfilePostgres 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: prontuario
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+    restart: always
+    ports:
+      - '5432:5432'
+
+ 
+
+volumes:
+  postgres-db-volume:
