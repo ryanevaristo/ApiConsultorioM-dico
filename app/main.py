@@ -1,5 +1,6 @@
 from routers.Medico import router as medico_router
 from routers.Paciente import router as paciente_router
+from routers.Usuario import router as usuario_router
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -18,6 +19,7 @@ async def home():
 app.include_router(router=medico_router, prefix="/medico", tags=["Médico"])
 app.include_router(router=paciente_router, prefix="/paciente", tags=["Paciente"])
 app.include_router(router=router,  tags=["Home"])
+app.include_router(router=usuario_router, prefix="/usuario", tags=["Usuário"])
 origins = [
     "http://localhost:3000",
 ]
